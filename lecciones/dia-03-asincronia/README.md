@@ -160,14 +160,14 @@ El escenario "Error de red" pide a `localhost:1`, un puerto sin servidor. El de 
 
 ## Dónde aterriza en la app final
 
-Las rutas son el plan de la Fase 6; la app aún no existe y esta tabla se actualizará con funciones concretas al construirla.
-
-| Tema | Archivo en `app/src/` | Uso previsto |
+| Tema | Archivo en `app/src/` | Función o fragmento |
 |---|---|---|
-| Fetch + `async/await` | `servicios/api.js` | Carga de `data/tareas-iniciales.json` con arreglo de respaldo si falla |
-| `AbortController` | `servicios/api.js` | Cancelación si la carga tarda demasiado |
-| `try/catch/finally` | `main.js` | Arranque que muestra un aviso discreto si se usa el respaldo |
-| Promesas | `servicios/api.js` | Funciones que devuelven promesas, consumibles con `await` |
+| Fetch + `async/await` | `servicios/api.js` | `cargarTareasIniciales()`: `fetch`, revisión de `respuesta.ok`, `respuesta.json()` |
+| `AbortController` | `servicios/api.js` | `cargarTareasIniciales()`: cancela a los 3000 ms y limpia el temporizador en `finally` |
+| Manejo de errores | `servicios/api.js` | `obtenerTareasIniciales()`: `try/catch` que devuelve el arreglo de respaldo (`TAREAS_RESPALDO`) |
+| `await` en el arranque | `main.js` | `iniciar()`: muestra un aviso discreto si el origen fue el respaldo |
+
+La ruta del JSON se resuelve con `new URL('../../data/tareas-iniciales.json', import.meta.url)`, relativa al módulo, para que funcione igual en localhost y bajo `/<repositorio>/` en GitHub Pages.
 
 ## Referencias
 

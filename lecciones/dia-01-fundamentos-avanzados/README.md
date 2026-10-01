@@ -156,15 +156,13 @@ Nota: los archivos son módulos ESM (`"type": "module"`), que se ejecutan en mod
 
 ## Dónde aterriza en la app final
 
-Las rutas son el plan de la Fase 6; la app aún no existe y esta tabla se actualizará con las funciones concretas al construirla.
-
-| Tema | Archivo en `app/src/` | Uso previsto |
+| Tema | Archivo en `app/src/` | Función o fragmento |
 |---|---|---|
-| Event loop | `main.js` | La carga inicial con `async/await` se resuelve en microtareas; el render ocurre después |
-| Scope (`let`/`const`) | todos | Sin `var` en la app |
-| Closures | `servicios/almacenamiento.js` | Closure que encapsula la clave de `localStorage` |
-| Closures | `modelo/Tarea.js` | Generador de IDs con contador privado |
-| `this` | `ui/vista.js` | Manejadores de eventos que conservan el contexto |
+| Event loop | `main.js` | `iniciar()` espera con `await obtenerTareasIniciales()`; el resto del script no se bloquea |
+| Scope (`let`/`const`) | todos | No hay `var` en la app |
+| Closures | `servicios/almacenamiento.js` | `crearAlmacenamiento(clave)`: la clave queda encapsulada |
+| Closures | `modelo/Tarea.js` | `crearGeneradorIds(prefijo, desde)`: contador privado por generador |
+| `this` | `modelo/Tarea.js` | `Tarea.conCambios()` usa `this.toJSON()`; los manejadores de `ui/vista.js` son funciones flecha, por lo que no pierden contexto |
 
 ## Referencias
 

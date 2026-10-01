@@ -141,14 +141,12 @@ El título hostil de la demo es `<img src=x onerror=alert(1)>`:
 
 ## Dónde aterriza en la app final
 
-Las rutas son el plan de la Fase 6; la app aún no existe y esta tabla se actualizará con funciones concretas al construirla.
-
-| Tema | Archivo en `app/src/` | Uso previsto |
+| Tema | Archivo en `app/src/` | Función o fragmento |
 |---|---|---|
-| Delegación | `ui/vista.js` | Un listener en la lista que distingue `completar`, `editar` y `eliminar` |
-| Web Storage | `servicios/almacenamiento.js` | Guardado en `localStorage` con `try/catch` |
-| Formularios y FormData | `ui/vista.js` | Formulario de nueva tarea |
-| `textContent` | `ui/vista.js` | Todo texto del usuario se pinta con `textContent`/`createElement` |
+| Delegación | `ui/vista.js` | `montarVista()`: un único `el.lista.addEventListener('click', …)` con `closest('[data-accion]')` y acciones `completar`, `editar`, `guardar`, `cancelar`, `eliminar` |
+| Web Storage | `servicios/almacenamiento.js` | `leer()` y `guardar()` con `try/catch` sobre `localStorage` |
+| Formularios y FormData | `ui/vista.js` | Manejador `submit` del formulario: `Object.fromEntries(new FormData(...))` y `preventDefault()` |
+| `textContent` | `ui/vista.js` | Helper `crear()` y `crearFila()`: todo texto del usuario va con `textContent`; no hay `innerHTML` |
 
 ## Referencias
 

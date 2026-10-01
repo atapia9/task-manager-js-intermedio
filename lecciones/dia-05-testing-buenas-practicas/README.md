@@ -35,7 +35,7 @@ El script ejecuta Jest con `node --experimental-vm-modules`, como indica la guí
 npm test -- lecciones/dia-05-testing-buenas-practicas/01-jest
 ```
 
-Resultado de la suite completa al cerrar este día: **6 suites, 33 pruebas, todas pasan** (incluye una prueba de humo de la Fase 0).
+Resultado de la suite completa del repositorio (lecciones del día 5 y pruebas de la app): **10 suites, 113 pruebas, todas pasan**.
 
 ---
 
@@ -101,15 +101,14 @@ Cada archivo tiene su prueba al lado (`*.test.js`). Puntos que se prueban:
 
 ## Dónde aterriza en la app final
 
-Las rutas son el plan de la Fase 6; la app aún no existe y esta tabla se actualizará con funciones concretas al construirla.
-
-| Tema | Archivo en `app/src/` y `tests/` | Uso previsto |
+| Tema | Archivo | Función o fragmento |
 |---|---|---|
-| Pruebas con Jest | `tests/*.test.js` | Pruebas de `Tarea`, `filtros`, `store` y `almacenamiento` (con doble de prueba del storage) |
-| Funciones puras | `modelo/filtros.js` | Filtrado y ordenamiento sin efectos secundarios |
-| Observer | `estado/store.js` | `suscribir`/`notificar`; la vista se redibuja en cada cambio |
-| Strategy | `modelo/filtros.js` | Objeto de estrategias de orden (fecha, prioridad) |
-| Factory | `modelo/Tarea.js` | Creación de `Tarea` y `TareaConVencimiento` |
+| Pruebas con Jest | `tests/` | `Tarea.test.js`, `filtros.test.js`, `store.test.js`, `almacenamiento.test.js` (con doble de prueba del storage) y `api.test.js` (con `fetch` simulado) |
+| Funciones puras | `app/src/modelo/filtros.js` | `porEstado`, `contarPendientes`, `ordenar`, `tareasVisibles` |
+| Módulo (closure) | `app/src/servicios/almacenamiento.js` | `crearAlmacenamiento(clave)` |
+| Observer | `app/src/estado/store.js` | `crearStore()`: `suscribir` devuelve la función para cancelar; `actualizar` notifica. La vista (`montarVista`) y el guardado (`main.js`) se suscriben |
+| Strategy | `app/src/modelo/filtros.js` | `estrategiasDeOrden` (`manual`, `fecha`, `prioridad`) y `ordenar()` |
+| Factory | `app/src/modelo/Tarea.js` | `crearTarea(datos)`: devuelve `TareaConVencimiento` si hay `fechaLimite`, y `Tarea` en otro caso |
 | DevTools | `ui/vista.js`, `servicios/almacenamiento.js` | Puntos de práctica de la guía |
 
 ## Referencias

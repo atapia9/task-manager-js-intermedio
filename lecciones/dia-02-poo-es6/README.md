@@ -158,14 +158,13 @@ Observa que `estadisticas.js` no se evalúa hasta que `main.js` ejecuta `await i
 
 ## Dónde aterriza en la app final
 
-Las rutas son el plan de la Fase 6; la app aún no existe y esta tabla se actualizará con funciones concretas al construirla.
-
-| Tema | Archivo en `app/src/` | Uso previsto |
+| Tema | Archivo en `app/src/` | Función o fragmento |
 |---|---|---|
-| Clases | `modelo/Tarea.js` | `Tarea` con campo privado y `static desdeJSON` |
-| Spread | `estado/store.js` | Actualizaciones inmutables del estado |
-| Desestructuración | `modelo/filtros.js` | Parámetros desestructurados en funciones puras |
-| Módulos ESM | `main.js` y todo `src/` | `<script type="module">` con imports entre archivos |
+| Clases | `modelo/Tarea.js` | `Tarea` (campo privado `#completada`, getter `completada`, `static desdeJSON`) y `TareaConVencimiento extends Tarea` |
+| Spread | `estado/store.js` | `actualizar()`: `estado = { ...estado, ...cambios }` |
+| Spread | `modelo/Tarea.js` | `conCambios()`: `crearTarea({ ...this.toJSON(), ...cambios })` |
+| Desestructuración | `modelo/filtros.js`, `estado/store.js` | `tareasVisibles({ tareas, filtro, orden })`, `crearStore({ tareas, filtro, orden })` |
+| Módulos ESM | `index.html` y todo `src/` | `<script type="module" src="src/main.js">` e imports entre archivos con extensión `.js` |
 
 ## Referencias
 

@@ -4,7 +4,7 @@
 
 Guía práctica para usar las herramientas de desarrollo del navegador sobre la app final. Los nombres de pestañas y menús pueden variar según navegador y versión; aquí se usa Chrome como referencia y se indica el equivalente en Firefox. Los nombres de Chrome para breakpoints y Network se contrastaron con su documentación oficial; los de la pestaña Application de Chrome y todos los de Firefox (Debugger, Storage, Network Monitor) **no se contrastaron ni se probaron**; confírmalos en tu versión.
 
-> **Estado:** la app final (`app/`) se construye en la Fase 6. Los nombres de archivo y funciones de abajo son los previstos y se confirmarán al terminar esa fase. Para practicar antes, usa la demo del día 4.
+> Los archivos y funciones que se mencionan existen en `app/src/`. También puedes practicar con la demo del día 4.
 
 ## Preparación
 
@@ -18,7 +18,7 @@ Objetivo: detener la ejecución cuando se pulsa un botón de la lista y ver qué
 
 | Paso | Chrome | Firefox |
 |---|---|---|
-| Abrir el código | Pestaña **Sources**, busca `ui/vista.js` (o `01-delegacion-eventos.js` en la demo) | Pestaña **Debugger** |
+| Abrir el código | Pestaña **Sources**, busca `src/ui/vista.js` y la línea del `el.lista.addEventListener('click', …)` (o `01-delegacion-eventos.js` en la demo) | Pestaña **Debugger** |
 | Poner el breakpoint | Clic en el número de línea de la primera línea dentro del listener | Igual |
 | Disparar | Pulsa "Completar" en una tarea | Igual |
 | Inspeccionar | Panel **Scope** y **Watch**: revisa `evento.target`, `boton`, `boton.dataset.accion` | Panel de variables |
@@ -33,7 +33,7 @@ Chrome también ofrece breakpoints por tipo de evento (panel **Event Listener Br
 | Paso | Chrome | Firefox |
 |---|---|---|
 | Abrir | Pestaña **Application** › **Storage** › **Local storage** › origen `http://localhost:8080` | Pestaña **Storage** › Local Storage |
-| Ver | La clave de tareas (`dia04-tareas` en la demo; la de la app se define en `almacenamiento.js`) y su valor JSON | Igual |
+| Ver | La clave de tareas (`dia04-tareas` en la demo; la de la app es `task-manager-js-intermedio:tareas`, definida en `main.js`) y su valor JSON | Igual |
 | Editar | Doble clic en el valor, cámbialo y recarga la página | Igual |
 | Borrar | Selecciona la fila y elimina, o usa la opción de limpiar todo | Igual |
 
@@ -47,7 +47,7 @@ La app, en el primer arranque sin datos guardados, pide `data/tareas-iniciales.j
 
 Pasos en Chrome:
 
-1. Pestaña **Application** › borra el `localStorage` del origen, para simular un primer arranque.
+1. Pestaña **Application** › borra el `localStorage` del origen (la clave `task-manager-js-intermedio:tareas`), para simular un primer arranque.
 2. Pestaña **Network**:
    - **Red lenta:** en el menú de **Throttling** elige un preset (por ejemplo, slow 4G) y recarga. Observa en la cascada cuánto tarda la petición.
    - **Fallo de la petición:** bloquea solo `tareas-iniciales.json` con **Request blocking** (clic derecho sobre la petición en la tabla, o la pestaña "Network request blocking" del cajón), y recarga.
@@ -59,11 +59,11 @@ Firefox: el **Network Monitor** también tiene un selector de throttling y puede
 
 ## 4. `console.table` y el resto de la consola
 
-En la pestaña **Console**, con la app abierta y el módulo accesible (por ejemplo, al pausar en un breakpoint dentro de `main.js`), ejecuta:
+En la pestaña **Console**, con la app abierta y el estado accesible (por ejemplo, al pausar con un breakpoint dentro del `render(estado)` de `ui/vista.js`, donde `estado.tareas` es la lista), ejecuta:
 
 ```js
-console.table(tareas);
-console.table(tareas, ['titulo', 'prioridad']); // solo algunas columnas
+console.table(estado.tareas);
+console.table(estado.tareas, ['titulo', 'prioridad']); // solo algunas columnas
 ```
 
 Verás una tabla con una fila por tarea. Otros métodos útiles: `console.group` / `console.groupEnd`, `console.time` / `console.timeEnd`, `console.error` y `console.dir`.
@@ -71,7 +71,7 @@ Verás una tabla con una fila por tarea. Otros métodos útiles: `console.group`
 Desde la consola también puedes leer el almacenamiento directamente:
 
 ```js
-JSON.parse(localStorage.getItem('dia04-tareas'))
+JSON.parse(localStorage.getItem('task-manager-js-intermedio:tareas'))
 ```
 
 ## Ejercicio
