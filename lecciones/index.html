@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecciones · Task Manager</title>
+  <meta name="description" content="Índice de las lecciones y demos del curso JavaScript Intermedio (REDEC-UNAM / FESC).">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --fondo: #f6f7f9; --superficie: #ffffff; --texto: #1c1e21; --suave: #4a4f57;
+      --borde: #c3c8d0; --acento: #1a5fb4;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --fondo: #15171a; --superficie: #1f2327; --texto: #ececee; --suave: #b4b9c1; --borde: #4a5059; --acento: #78aeed; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--fondo); color: var(--texto); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.5; }
+    main, header, footer { max-width: 48rem; margin: 0 auto; padding: 0 1rem; }
+    header { padding-top: 1.5rem; }
+    h1 { margin: 0; font-size: 1.75rem; }
+    h2 { font-size: 1.2rem; margin: 0 0 .5rem; }
+    a { color: var(--acento); }
+    a:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
+    .suave { color: var(--suave); }
+    .dia { background: var(--superficie); border: 1px solid var(--borde); border-radius: 8px; padding: 1rem; margin: 1rem 0; }
+    .dia ul { margin: .25rem 0 0; padding-left: 1.2rem; }
+    .dia li { margin: .2rem 0; }
+    footer { margin: 2rem auto; padding-bottom: 2rem; color: var(--suave); font-size: .875rem; border-top: 1px solid var(--borde); padding-top: 1rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lecciones</h1>
+    <p class="suave">Ejemplos por día del curso JavaScript Intermedio (REDEC-UNAM / FESC), todos en el dominio de un gestor de tareas.</p>
+    <p><a href="../">Ir a la app final (Task Manager)</a></p>
+  </header>
+
+  <main>
+    <p>Las demos de esta página se ejecutan en el navegador. Los ejemplos que solo usan Node se leen en GitHub y se ejecutan con <code>node archivo.js</code> desde el repositorio. Cada día tiene su README con explicación, salida esperada y ejercicios.</p>
+
+    <section class="dia" aria-labelledby="d1">
+      <h2 id="d1">Día 1 — Fundamentos avanzados</h2>
+      <p class="suave">Event loop, hoisting y scope, closures y <code>this</code>. Ejemplos de Node, sin demo de navegador.</p>
+      <ul>
+        <li><a href="https://github.com/atapia9/task-manager-js-intermedio/tree/main/lecciones/dia-01-fundamentos-avanzados">Código y README en GitHub</a></li>
+      </ul>
+    </section>
+
+    <section class="dia" aria-labelledby="d2">
+      <h2 id="d2">Día 2 — POO y ES6+</h2>
+      <p class="suave">Prototipos, clases, desestructuración, spread y rest, módulos ESM. Ejemplos de Node.</p>
+      <ul>
+        <li><a href="https://github.com/atapia9/task-manager-js-intermedio/tree/main/lecciones/dia-02-poo-es6">Código y README en GitHub</a></li>
+      </ul>
+    </section>
+
+    <section class="dia" aria-labelledby="d3">
+      <h2 id="d3">Día 3 — Programación asíncrona</h2>
+      <p class="suave">Callbacks, promesas y <code>async/await</code> (Node) y Fetch API (navegador).</p>
+      <ul>
+        <li><a href="dia-03-asincronia/04-fetch/demo.html">Demo: Fetch API con errores y cancelación</a></li>
+        <li><a href="https://github.com/atapia9/task-manager-js-intermedio/tree/main/lecciones/dia-03-asincronia">Código y README en GitHub</a></li>
+      </ul>
+    </section>
+
+    <section class="dia" aria-labelledby="d4">
+      <h2 id="d4">Día 4 — DOM avanzado y eventos</h2>
+      <p class="suave">Delegación de eventos, Web Storage, formularios con FormData y <code>textContent</code> frente a <code>innerHTML</code>.</p>
+      <ul>
+        <li><a href="dia-04-dom-eventos/demo.html">Demo: los cuatro temas en una página</a></li>
+        <li><a href="https://github.com/atapia9/task-manager-js-intermedio/tree/main/lecciones/dia-04-dom-eventos">Código y README en GitHub</a></li>
+      </ul>
+    </section>
+
+    <section class="dia" aria-labelledby="d5">
+      <h2 id="d5">Día 5 — Testing y buenas prácticas</h2>
+      <p class="suave">Pruebas con Jest, guía de DevTools y patrones de diseño. Se ejecutan con <code>npm test</code>.</p>
+      <ul>
+        <li><a href="https://github.com/atapia9/task-manager-js-intermedio/tree/main/lecciones/dia-05-testing-buenas-practicas">Código y README en GitHub</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Nota de divulgación:</strong> Este material fue elaborado con asistencia de Claude (Anthropic) y revisado por Jesús Armando Tapia Gallegos.</p>
+    <p><a href="https://github.com/atapia9/task-manager-js-intermedio">Repositorio en GitHub</a></p>
+  </footer>
+</body>
+</html>
