@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Día 4 · DOM y eventos</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, sans-serif; max-width: 48rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    section { border-top: 1px solid #8886; padding-top: 1rem; margin-top: 2rem; }
+    button, input, select { font: inherit; padding: .4rem .6rem; }
+    button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #1a5fb4; outline-offset: 2px; }
+    li.completada span { text-decoration: line-through; }
+    pre { background: #8883; padding: .75rem; overflow-x: auto; min-height: 2rem; }
+    .error { color: #b00020; min-height: 1.5rem; }
+    @media (prefers-color-scheme: dark) { .error { color: #ff8a80; } }
+    .columnas { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; }
+    label { display: block; margin: .5rem 0 .2rem; }
+  </style>
+</head>
+<body>
+  <h1>Día 4 — DOM avanzado y eventos</h1>
+  <p>Sirve esta carpeta con <code>npm run serve</code> (desde la raíz del repo) y abre esta página por HTTP.</p>
+
+  <section aria-labelledby="t1">
+    <h2 id="t1">1. Delegación de eventos</h2>
+    <p>Un único listener en el <code>&lt;ul&gt;</code>.</p>
+    <ul id="lista-delegacion"></ul>
+    <button type="button" id="agregar-delegacion">Agregar tarea</button>
+    <p id="mensaje-delegacion" role="status"></p>
+  </section>
+
+  <section aria-labelledby="t2">
+    <h2 id="t2">2. Web Storage</h2>
+    <p>Abre esta página en dos pestañas y agrega tareas en <code>localStorage</code> desde una: la otra se actualiza por el evento <code>storage</code>.</p>
+    <div id="storage-controles">
+      <button type="button" data-storage="agregar-local">Agregar en localStorage</button>
+      <button type="button" data-storage="agregar-sesion">Agregar en sessionStorage</button>
+      <button type="button" data-storage="limpiar">Limpiar ambos</button>
+    </div>
+    <div class="columnas">
+      <div><h3>localStorage</h3><pre id="salida-local"></pre></div>
+      <div><h3>sessionStorage</h3><pre id="salida-sesion"></pre></div>
+    </div>
+    <h3>Registro de eventos</h3>
+    <ul id="registro-storage"></ul>
+  </section>
+
+  <section aria-labelledby="t3">
+    <h2 id="t3">3. Formularios y FormData</h2>
+    <form id="formulario-tarea" novalidate>
+      <label for="titulo">Título</label>
+      <input id="titulo" name="titulo" required minlength="3" autocomplete="off">
+      <label for="prioridad">Prioridad</label>
+      <select id="prioridad" name="prioridad">
+        <option value="baja">Baja</option>
+        <option value="media" selected>Media</option>
+        <option value="alta">Alta</option>
+      </select>
+      <label for="fecha">Fecha límite (opcional)</label>
+      <input id="fecha" name="fechaLimite" type="date">
+      <p><button type="submit">Crear tarea</button></p>
+    </form>
+    <p id="error-formulario" class="error" role="alert"></p>
+    <pre id="resultado-formulario"></pre>
+  </section>
+
+  <section aria-labelledby="t4">
+    <h2 id="t4">4. textContent vs innerHTML</h2>
+    <label for="titulo-hostil">Título de la tarea</label>
+    <input id="titulo-hostil" size="40" value="&lt;img src=x onerror=alert(1)&gt;">
+    <div class="columnas">
+      <div>
+        <h3>Seguro: textContent</h3>
+        <button type="button" id="pintar-seguro">Pintar con textContent</button>
+        <pre id="salida-segura"></pre>
+      </div>
+      <div>
+        <h3>Vulnerable: innerHTML</h3>
+        <label><input type="checkbox" id="confirmar-vulnerable"> Entiendo que esto ejecutará código del texto</label>
+        <button type="button" id="pintar-vulnerable" disabled>Pintar con innerHTML</button>
+        <div id="salida-vulnerable"></div>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="./01-delegacion-eventos.js"></script>
+  <script type="module" src="./02-web-storage.js"></script>
+  <script type="module" src="./03-formularios-formdata.js"></script>
+  <script type="module" src="./04-textcontent-vs-innerhtml.js"></script>
+</body>
+</html>
