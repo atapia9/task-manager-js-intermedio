@@ -1,0 +1,19 @@
+{
+  "name": "task-manager-js-intermedio",
+  "version": "0.1.0",
+  "description": "Task Manager didáctico para el curso JavaScript Intermedio (REDEC-UNAM / FESC)",
+  "type": "module",
+  "private": true,
+  "author": "Jesús Armando Tapia Gallegos",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "serve": "npx --yes http-server . -p 8080 -c-1"
+  },
+  "devDependencies": {
+    "jest": "^30.5.2"
+  }
+}
