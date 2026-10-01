@@ -1,0 +1,5 @@
+[
+  { "id": "T-1", "titulo": "Preparar clase de JavaScript", "prioridad": "alta", "completada": false },
+  { "id": "T-2", "titulo": "Corregir ejercicios", "prioridad": "media", "completada": true },
+  { "id": "T-3", "titulo": "Actualizar diapositivas", "prioridad": "baja", "completada": false }
+]

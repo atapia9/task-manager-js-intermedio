@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Día 3 · Fetch API</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 42rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    button { margin: .25rem .25rem .25rem 0; padding: .5rem .75rem; }
+    button:focus-visible { outline: 3px solid #1a5fb4; outline-offset: 2px; }
+    pre { background: #f2f2f2; color: #111; padding: 1rem; overflow-x: auto; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #1b1b1b; color: #eee; }
+      pre { background: #2b2b2b; color: #eee; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Fetch API con tareas</h1>
+  <p>Cada botón dispara un escenario distinto. El resultado aparece abajo.</p>
+  <div>
+    <button type="button" data-escenario="ok">Carga correcta</button>
+    <button type="button" data-escenario="404">Archivo inexistente (404)</button>
+    <button type="button" data-escenario="json">JSON inválido</button>
+    <button type="button" data-escenario="red">Error de red</button>
+    <button type="button" data-escenario="tiempo">Tiempo límite (1 ms)</button>
+  </div>
+  <pre id="salida" role="status" aria-live="polite">Elige un escenario.</pre>
+
+  <script type="module">
+    import { cargarJSON } from './fetch.js';
+
+    const escenarios = {
+      ok: () => cargarJSON('./tareas.json'),
+      404: () => cargarJSON('./no-existe.json'),
+      json: () => cargarJSON('./tareas-invalido.json'),
+      red: () => cargarJSON('http://localhost:1/tareas.json'), // puerto sin servidor
+      tiempo: () => cargarJSON('./tareas.json', { limiteMs: 1 }),
+    };
+
+    const salida = document.querySelector('#salida');
+    document.addEventListener('click', async (evento) => {
+      const boton = evento.target.closest('[data-escenario]');
+      if (!boton) return;
+      salida.textContent = 'Cargando…';
+      try {
+        const datos = await escenarios[boton.dataset.escenario]();
+        salida.textContent = `OK: ${datos.length} tareas\n` + JSON.stringify(datos, null, 2);
+      } catch (error) {
+        salida.textContent = `Error: ${error.message}`;
+      }
+    });
+  </script>
+</body>
+</html>
