@@ -4,6 +4,7 @@
   "description": "Task Manager didáctico para el curso JavaScript Intermedio (REDEC-UNAM / FESC)",
   "type": "module",
   "private": true,
+  "license": "MIT",
   "author": "Jesús Armando Tapia Gallegos",
   "engines": {
     "node": ">=20"
