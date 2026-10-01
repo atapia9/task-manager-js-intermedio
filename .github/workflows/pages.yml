@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   construir:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -42,7 +42,7 @@ jobs:
 
   publicar:
     needs: construir
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.despliegue.outputs.page_url }}
