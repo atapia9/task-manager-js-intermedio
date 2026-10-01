@@ -1,0 +1,7 @@
+[
+  { "id": "T-1", "titulo": "Preparar la clase de JavaScript", "prioridad": "alta", "completada": false, "fechaLimite": "2026-12-15" },
+  { "id": "T-2", "titulo": "Revisar los ejercicios del día 3", "prioridad": "media", "completada": false },
+  { "id": "T-3", "titulo": "Actualizar las diapositivas", "prioridad": "baja", "completada": true },
+  { "id": "T-4", "titulo": "Publicar la demo en GitHub Pages", "prioridad": "alta", "completada": false, "fechaLimite": "2026-11-30" },
+  { "id": "T-5", "titulo": "Responder dudas del grupo", "prioridad": "media", "completada": false, "fechaLimite": "2026-10-20" }
+]
