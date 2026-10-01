@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task Manager · JavaScript Intermedio</title>
+  <meta name="description" content="Gestor de tareas didáctico del curso JavaScript Intermedio (REDEC-UNAM / FESC).">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header class="encabezado">
+    <h1>Task Manager</h1>
+    <p class="subtitulo">Ejemplo didáctico del curso JavaScript Intermedio</p>
+  </header>
+
+  <main>
+    <p id="aviso" class="aviso" role="status" hidden></p>
+
+    <section aria-labelledby="titulo-nueva">
+      <h2 id="titulo-nueva">Nueva tarea</h2>
+      <form id="formulario-tarea" class="formulario" novalidate>
+        <div class="campo campo-ancho">
+          <label for="titulo">Título</label>
+          <input id="titulo" name="titulo" type="text" required autocomplete="off" aria-describedby="error-formulario">
+        </div>
+        <div class="campo">
+          <label for="prioridad">Prioridad</label>
+          <select id="prioridad" name="prioridad">
+            <option value="baja">Baja</option>
+            <option value="media" selected>Media</option>
+            <option value="alta">Alta</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="fecha">Fecha límite (opcional)</label>
+          <input id="fecha" name="fechaLimite" type="date">
+        </div>
+        <button type="submit" class="primario">Agregar tarea</button>
+      </form>
+      <p id="error-formulario" class="error" role="alert"></p>
+    </section>
+
+    <section aria-labelledby="titulo-lista">
+      <h2 id="titulo-lista">Mis tareas</h2>
+
+      <div class="barra">
+        <fieldset id="filtros" class="filtros">
+          <legend>Mostrar</legend>
+          <label><input type="radio" name="filtro" value="todas" checked> Todas</label>
+          <label><input type="radio" name="filtro" value="pendientes"> Pendientes</label>
+          <label><input type="radio" name="filtro" value="completadas"> Completadas</label>
+        </fieldset>
+        <div class="campo">
+          <label for="orden">Ordenar por</label>
+          <select id="orden">
+            <option value="manual">Orden de creación</option>
+            <option value="fecha">Fecha límite</option>
+            <option value="prioridad">Prioridad</option>
+          </select>
+        </div>
+      </div>
+
+      <p id="error-lista" class="error" role="alert"></p>
+      <ul id="lista-tareas" class="lista"></ul>
+      <p id="estado-vacio" class="vacio" hidden>No hay tareas para mostrar.</p>
+
+      <div class="pie-lista">
+        <p id="contador" role="status"></p>
+        <button type="button" id="limpiar-completadas">Limpiar completadas</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>
+      Código fuente:
+      <a href="https://github.com/atapia9/task-manager-js-intermedio">github.com/atapia9/task-manager-js-intermedio</a>
+    </p>
+    <p><strong>Nota de divulgación:</strong> Este material fue elaborado con asistencia de Claude (Anthropic) y revisado por Jesús Armando Tapia Gallegos.</p>
+  </footer>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
