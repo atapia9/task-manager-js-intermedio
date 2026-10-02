@@ -162,7 +162,7 @@ Observa que `estadisticas.js` no se evalúa hasta que `main.js` ejecuta `await i
 |---|---|---|
 | Clases | `modelo/Tarea.js` | `Tarea` (campo privado `#completada`, getter `completada`, `static desdeJSON`) y `TareaConVencimiento extends Tarea` |
 | Spread | `estado/store.js` | `actualizar()`: `estado = { ...estado, ...cambios }` |
-| Spread | `modelo/Tarea.js` | `conCambios()`: `crearTarea({ ...this.toJSON(), ...cambios })` |
+| Spread | `modelo/Tarea.js` | `conCambios()`: `{ ...this.toJSON(), ...cambios }` y luego `crearTarea(tipoDeDatos(datos), datos)` |
 | Desestructuración | `modelo/filtros.js`, `estado/store.js` | `tareasVisibles({ tareas, filtro, orden })`, `crearStore({ tareas, filtro, orden })` |
 | Módulos ESM | `index.html` y todo `src/` | `<script type="module" src="src/main.js">` e imports entre archivos con extensión `.js` |
 

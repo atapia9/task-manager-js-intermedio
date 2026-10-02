@@ -15,8 +15,8 @@ function crearStorageFalso({ falla = false } = {}) {
 }
 
 const tareas = [
-  crearTarea({ id: 'T-1', titulo: 'Uno', prioridad: 'alta' }),
-  crearTarea({ id: 'T-2', titulo: 'Dos', completada: true, fechaLimite: '2026-02-01' }),
+  crearTarea('simple', { id: 'T-1', titulo: 'Uno', prioridad: 'alta' }),
+  crearTarea('conVencimiento', { id: 'T-2', titulo: 'Dos', completada: true, fechaLimite: '2026-02-01' }),
 ];
 
 describe('almacenamiento', () => {

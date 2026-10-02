@@ -61,7 +61,8 @@ export class Tarea {
 
   // Devuelve una tarea nueva con los cambios aplicados (conserva la subclase).
   conCambios(cambios) {
-    return crearTarea({ ...this.toJSON(), ...cambios });
+    const datos = { ...this.toJSON(), ...cambios };
+    return crearTarea(tipoDeDatos(datos), datos);
   }
 
   toJSON() {
@@ -69,7 +70,7 @@ export class Tarea {
   }
 
   static desdeJSON(objeto) {
-    return crearTarea(objeto);
+    return crearTarea(tipoDeDatos(objeto), objeto);
   }
 }
 
@@ -96,10 +97,25 @@ export class TareaConVencimiento extends Tarea {
   }
 }
 
-// Factory: decide qué clase instanciar según los datos recibidos.
-export function crearTarea(datos) {
+export const TIPOS_TAREA = ['simple', 'conVencimiento'];
+
+// Factory: el llamador indica el tipo y la función devuelve la clase correspondiente.
+export function crearTarea(tipo, datos) {
   if (datos === null || typeof datos !== 'object') throw new TypeError('Los datos de la tarea deben ser un objeto');
-  return datos.fechaLimite ? new TareaConVencimiento(datos) : new Tarea(datos);
+  switch (tipo) {
+    case 'simple':
+      return new Tarea(datos);
+    case 'conVencimiento':
+      return new TareaConVencimiento(datos); // exige una fechaLimite válida
+    default:
+      throw new RangeError(`Tipo de tarea desconocido: ${tipo}`);
+  }
+}
+
+// Los datos que llegan de fuera (JSON, localStorage, formulario) no traen el tipo:
+// aquí se deduce una sola vez, en la frontera, a partir de si hay fecha límite.
+export function tipoDeDatos(datos) {
+  return datos?.fechaLimite ? 'conVencimiento' : 'simple';
 }
 
 // Convierte una lista de objetos en tareas; descarta (y cuenta) los datos inválidos.
@@ -108,7 +124,7 @@ export function tareasDesdeLista(lista) {
   let descartadas = 0;
   for (const elemento of lista) {
     try {
-      tareas.push(crearTarea(elemento));
+      tareas.push(crearTarea(tipoDeDatos(elemento), elemento));
     } catch {
       descartadas += 1;
     }

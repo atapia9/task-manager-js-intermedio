@@ -1,10 +1,13 @@
 import { describe, test, expect } from '@jest/globals';
-import { crearTarea } from '../app/src/modelo/Tarea.js';
+import { crearTarea, tipoDeDatos } from '../app/src/modelo/Tarea.js';
 import {
   porEstado, contarPendientes, ordenar, tareasVisibles, estrategiasDeOrden, CRITERIOS_ORDEN, FILTROS,
 } from '../app/src/modelo/filtros.js';
 
-const t = (id, extra = {}) => crearTarea({ id, titulo: `Tarea ${id}`, ...extra });
+const t = (id, extra = {}) => {
+  const datos = { id, titulo: `Tarea ${id}`, ...extra };
+  return crearTarea(tipoDeDatos(datos), datos);
+};
 const tareas = [
   t('T-1', { prioridad: 'baja', fechaLimite: '2026-03-01' }),
   t('T-2', { prioridad: 'alta', completada: true }),

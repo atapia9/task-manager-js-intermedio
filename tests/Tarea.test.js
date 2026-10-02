@@ -1,6 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
 import {
-  Tarea, TareaConVencimiento, crearTarea, tareasDesdeLista,
+  Tarea, TareaConVencimiento, crearTarea, tipoDeDatos, TIPOS_TAREA, tareasDesdeLista,
   crearGeneradorIds, numeroDeId, esFechaISO, hoyISO, PRIORIDADES,
 } from '../app/src/modelo/Tarea.js';
 
@@ -126,19 +126,46 @@ describe('TareaConVencimiento', () => {
   });
 });
 
-describe('crearTarea (factory)', () => {
-  test('sin fecha crea Tarea; con fecha, TareaConVencimiento', () => {
-    expect(crearTarea({ id: 'T-1', titulo: 'A' })).not.toBeInstanceOf(TareaConVencimiento);
-    expect(crearTarea({ id: 'T-1', titulo: 'A', fechaLimite: '2026-01-01' })).toBeInstanceOf(TareaConVencimiento);
+describe('crearTarea (factory con tipo explícito)', () => {
+  test('"simple" crea Tarea y "conVencimiento" crea TareaConVencimiento', () => {
+    const simple = crearTarea('simple', { id: 'T-1', titulo: 'A' });
+    const conFecha = crearTarea('conVencimiento', { id: 'T-1', titulo: 'A', fechaLimite: '2026-01-01' });
+    expect(simple).toBeInstanceOf(Tarea);
+    expect(simple).not.toBeInstanceOf(TareaConVencimiento);
+    expect(conFecha).toBeInstanceOf(TareaConVencimiento);
   });
 
-  test('fecha vacía o null cuenta como sin fecha', () => {
-    expect(crearTarea({ id: 'T-1', titulo: 'A', fechaLimite: '' })).toBeInstanceOf(Tarea);
-    expect(crearTarea({ id: 'T-1', titulo: 'A', fechaLimite: null }).fechaLimite).toBeNull();
+  test('"simple" ignora una fechaLimite que reciba', () => {
+    expect(crearTarea('simple', { id: 'T-1', titulo: 'A', fechaLimite: '2026-01-01' }).fechaLimite).toBeNull();
   });
 
-  test.each([[null], ['texto'], [42]])('rechaza %j', (valor) => {
-    expect(() => crearTarea(valor)).toThrow(TypeError);
+  test('"conVencimiento" sin fecha válida lanza RangeError', () => {
+    expect(() => crearTarea('conVencimiento', { id: 'T-1', titulo: 'A' })).toThrow(RangeError);
+    expect(() => crearTarea('conVencimiento', { id: 'T-1', titulo: 'A', fechaLimite: '2026-02-30' })).toThrow(RangeError);
+  });
+
+  test.each([['recurrente'], [undefined], [{ id: 'T-1', titulo: 'A' }]])('tipo desconocido %j lanza RangeError', (tipo) => {
+    expect(() => crearTarea(tipo, { id: 'T-1', titulo: 'A' })).toThrow(RangeError);
+  });
+
+  test.each([[null], ['texto'], [42]])('datos %j lanzan TypeError', (valor) => {
+    expect(() => crearTarea('simple', valor)).toThrow(TypeError);
+  });
+
+  test('TIPOS_TAREA lista los tipos válidos', () => {
+    expect(TIPOS_TAREA).toEqual(['simple', 'conVencimiento']);
+  });
+});
+
+describe('tipoDeDatos', () => {
+  test.each([
+    [{ fechaLimite: '2026-01-01' }, 'conVencimiento'],
+    [{ fechaLimite: '' }, 'simple'],
+    [{ fechaLimite: null }, 'simple'],
+    [{}, 'simple'],
+    [null, 'simple'],
+  ])('%j -> %s', (datos, esperado) => {
+    expect(tipoDeDatos(datos)).toBe(esperado);
   });
 });
 

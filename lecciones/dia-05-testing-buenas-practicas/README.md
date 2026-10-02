@@ -108,7 +108,7 @@ Cada archivo tiene su prueba al lado (`*.test.js`). Puntos que se prueban:
 | Módulo (closure) | `app/src/servicios/almacenamiento.js` | `crearAlmacenamiento(clave)` |
 | Observer | `app/src/estado/store.js` | `crearStore()`: `suscribir` devuelve la función para cancelar; `actualizar` notifica. La vista (`montarVista`) y el guardado (`main.js`) se suscriben |
 | Strategy | `app/src/modelo/filtros.js` | `estrategiasDeOrden` (`manual`, `fecha`, `prioridad`) y `ordenar()` |
-| Factory | `app/src/modelo/Tarea.js` | `crearTarea(datos)`: devuelve `TareaConVencimiento` si hay `fechaLimite`, y `Tarea` en otro caso |
+| Factory | `app/src/modelo/Tarea.js` | `crearTarea(tipo, datos)`: `'simple'` devuelve `Tarea` y `'conVencimiento'` devuelve `TareaConVencimiento`. `tipoDeDatos(datos)` deduce el tipo para datos externos (JSON, `localStorage`, formulario) |
 | DevTools | `ui/vista.js`, `servicios/almacenamiento.js` | Puntos de práctica de la guía |
 
 ## Referencias

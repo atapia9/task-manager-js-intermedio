@@ -1,4 +1,4 @@
-import { crearTarea, crearGeneradorIds, numeroDeId } from '../modelo/Tarea.js';
+import { crearTarea, tipoDeDatos, crearGeneradorIds, numeroDeId } from '../modelo/Tarea.js';
 import { FILTROS, CRITERIOS_ORDEN } from '../modelo/filtros.js';
 
 // Patrón Observer: la vista y el guardado se suscriben y reciben el estado en cada cambio.
@@ -26,7 +26,8 @@ export function crearStore({ tareas = [], filtro = 'todas', orden = 'manual' } =
     },
 
     agregar({ titulo, prioridad, fechaLimite }) {
-      const tarea = crearTarea({ id: generarId(), titulo, prioridad, fechaLimite });
+      const datos = { id: generarId(), titulo, prioridad, fechaLimite };
+      const tarea = crearTarea(tipoDeDatos(datos), datos);
       actualizar({ tareas: [...estado.tareas, tarea] });
     },
 

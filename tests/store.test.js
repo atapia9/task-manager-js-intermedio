@@ -3,8 +3,8 @@ import { crearStore } from '../app/src/estado/store.js';
 import { crearTarea } from '../app/src/modelo/Tarea.js';
 
 const base = () => [
-  crearTarea({ id: 'T-1', titulo: 'Uno' }),
-  crearTarea({ id: 'T-2', titulo: 'Dos', completada: true }),
+  crearTarea('simple', { id: 'T-1', titulo: 'Uno' }),
+  crearTarea('simple', { id: 'T-2', titulo: 'Dos', completada: true }),
 ];
 
 describe('store: Observer', () => {
