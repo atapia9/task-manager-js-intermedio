@@ -29,7 +29,7 @@ npm install
 npm test
 ```
 
-El script ejecuta Jest con `node --experimental-vm-modules`, como indica la guía de ECMAScript Modules de jestjs.io; por eso Node muestra un aviso de "VM Modules is an experimental feature". `jest.config.js` desactiva las transformaciones (`transform: {}`) para que los archivos se ejecuten como ESM nativo. Para una sola carpeta:
+El script ejecuta Jest con `node --experimental-vm-modules`, como indica la guía de ECMAScript Modules de jestjs.io; esa función es experimental y Node avisaría de ello, así que el script añade `--disable-warning=ExperimentalWarning` (Node 20.11 o superior) para ocultar ese aviso. `jest.config.js` desactiva las transformaciones (`transform: {}`) para que los archivos se ejecuten como ESM nativo. Para una sola carpeta:
 
 ```bash
 npm test -- lecciones/dia-05-testing-buenas-practicas/01-jest

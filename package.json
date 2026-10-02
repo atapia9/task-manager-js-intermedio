@@ -7,11 +7,11 @@
   "license": "MIT",
   "author": "Jesús Armando Tapia Gallegos",
   "engines": {
-    "node": ">=20"
+    "node": ">=20.11"
   },
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test": "node --experimental-vm-modules --disable-warning=ExperimentalWarning node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules --disable-warning=ExperimentalWarning node_modules/jest/bin/jest.js --watch",
     "serve": "node scripts/servidor.js 8080"
   },
   "devDependencies": {

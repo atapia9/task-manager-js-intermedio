@@ -51,7 +51,7 @@ Sin frameworks ni bundlers. La única dependencia de desarrollo es Jest.
 
 ## Cómo usarlo en tu equipo
 
-Requisitos: Node.js 20 o superior (el CI usa Node 24) y npm.
+Requisitos: Node.js 20.11 o superior (el CI usa Node 24) y npm.
 
 ```bash
 npm install     # instala Jest
@@ -67,7 +67,7 @@ Con el servidor activo:
 
 Las demos del navegador necesitan HTTP (no funcionan con doble clic sobre el archivo); el README del día 3 explica por qué. Los ejemplos sin DOM se ejecutan con `node`, por ejemplo `node lecciones/dia-01-fundamentos-avanzados/03-closures.js`.
 
-`npm test` muestra un aviso de Node sobre "VM Modules": Jest necesita `--experimental-vm-modules` para ejecutar módulos ESM nativos, según su guía oficial.
+`npm test` ejecuta Jest con `--experimental-vm-modules`, que necesita para módulos ESM nativos según su guía oficial. Node avisaría de que esa función es experimental; el script lo silencia con `--disable-warning=ExperimentalWarning` (disponible desde Node 20.11), que oculta solo avisos de ese tipo.
 
 ## Publicación y CI
 
